@@ -15,7 +15,7 @@ class BaseModel():
         return f"[{self.__class__.__name__}]({self.id}){self.__dict__}"
     
     def save(self):
-        self.update_at = datetime.now()
+        self.updated_at = datetime.now()
         
     def to_dict(self):
         dt = {}
@@ -70,6 +70,13 @@ class BaseModelTest(unittest.TestCase):
         self.assertEqual(m.created_at, m.created_at)
         d = BaseModel()
         self.assertEqual(d.created_at, d.created_at)
+        
+    def test_save(self):
+        model = BaseModel()
+        original_updated_at = model.updated_at
+        model.save()
+        self.assertNotEqual(original_updated_at, model.updated_at)
+
     
     
 
