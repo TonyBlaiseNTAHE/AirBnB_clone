@@ -15,10 +15,20 @@ class BaseModel
 class BaseModel:
     """initializing public class attribute
     """
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """initialize class attribute"""
+        lst = ['Created_at', 'updated_at']
+        if kwargs or kwargs != {}:
+            for key, val in kwargs.items():
+                if key != '__class__':
+                    if key in lst:
+                        setattr(self, key, datetime.fromisoformat(val))
+                    else:
+                        setattr(self, key, val)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ returns the class name, id and
