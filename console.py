@@ -16,6 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """ declaring methods
     """
     prompt = "(hbnb) "
+    lst = ['BaseModel']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -35,9 +36,9 @@ class HBNBCommand(cmd.Cmd):
         saves it (to the JSON file) and prints
         the id
         """
-        if arg is None or arg == "":
+        if not arg or arg == " ":
             print("** class name missing**")
-        elif arg not in storage.all_cls():
+        elif arg not in self.lst:
             print("** class doesn't exit**")
         else:
             obj = BaseModel()
@@ -50,11 +51,11 @@ class HBNBCommand(cmd.Cmd):
         of an instance based on the class
         name and id
         """
-        if arg is None or arg == "":
+        if not arg or arg == " ":
             print("** class doesn't exist**")
         else:
             args = arg.split(' ')
-            if args[0] not in storage.all_cls():
+            if args[0] not in self.lst:
                 print("** class doesn't exist**")
             elif len(args) < 2:
                 print("** instance id missing**")
@@ -71,11 +72,11 @@ class HBNBCommand(cmd.Cmd):
         of an instance based on the class
         name and id
         """
-        if arg is None or arg == "":
+        if not arg or arg == " ":
             print("** class doesn't exist**")
         else:
             args = arg.split(' ')
-            if args[0] not in storage.all_cls():
+            if args[0] not in self.lst:
                 print("** class doesn't exist**")
             elif len(args) < 2:
                 print("** instance id missing**")
@@ -89,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation
+        Prints all string representation 
         of all instances based or not on the class name.
         """
         if arg == "":
@@ -114,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         and id by adding or updating attribute
         (save the change into the JSON file)
         """
-        if arg is None or arg == "":
+        if not arg or arg == " ":
             print("** class name missing **")
         else:
             args = arg.split(" ")
@@ -136,7 +137,6 @@ class HBNBCommand(cmd.Cmd):
                 if ky == key:
                     setattr(storage.all()[key], args[2], args[3])
                     storage.all()[key].save()
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
