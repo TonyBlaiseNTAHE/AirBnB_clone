@@ -1,25 +1,20 @@
 #!/usr/bin/python3
-
 """
 user module
 """
-
 from models.base_model import BaseModel
-
-"""
-User class
-"""
 
 
 class User(BaseModel):
     """
-    user attributes
+    User class
     """
+
     email = ""
     password = ""
     first_name = ""
     last_name = ""
 
     def __init__(self, *args, **kwargs):
-        """ class constructor"""
+        """Overriding constructor"""
         super().__init__(*args, **kwargs)
