@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation 
+        Prints all string representation
         of all instances based or not on the class name.
         """
         if arg == "":
@@ -137,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
                 if ky == key:
                     setattr(storage.all()[key], args[2], args[3])
                     storage.all()[key].save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
