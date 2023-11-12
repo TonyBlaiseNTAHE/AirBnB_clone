@@ -38,8 +38,10 @@ class FileStorage:
         return a dictionary of all classes
         """
         from models.base_model import BaseModel
+        from models.user import User
         dt = {
-            'BaseModel': BaseModel
+            'BaseModel': BaseModel,
+            'User': User
         }
         return dt
 
