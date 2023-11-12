@@ -1,6 +1,7 @@
 #!/usr/bin/python3
+
 """
-place module 
+place module
 """
 
 from models.base_model import BaseModel
@@ -8,6 +9,7 @@ from models.base_model import BaseModel
 """
 class module
 """
+
 
 class Place(BaseModel):
     """place attribute"""
@@ -22,4 +24,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = {}
-    
