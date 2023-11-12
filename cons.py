@@ -4,21 +4,12 @@ console module
 """
 
 import cmd
-import shlex
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 """
 class HBNBCommand
 """
-
-
-def parse(line: str):
-    """
-    function to split argumets
-    """
-    arg_list = shlex.split(line)
-    return arg_list, len(arg_list)
 
 
 class HBNBCommand(cmd.Cmd):
@@ -85,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split(' ')
-            if args[0] not in self.lst:
+            if args[0] not in storage.all_cls():
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -118,43 +109,34 @@ class HBNBCommand(cmd.Cmd):
                         lst.append(str(val))
                 print(lst)
 
-    def do_update(self, args):
-        """ update <class name> <id> <attribute name> "<attribute value>"
-            Updates an instance based on the class name and id using attr
+    def do_update(self, arg):
         """
-        args_cd, n = parse(args)
-        obj_instance = storage.all()
-
-        if n == 0:
+        Updates an instance based on the class name
+        and id by adding or updating attribute
+        (save the change into the JSON file)
+        """
+        if not arg or arg == " ":
             print("** class name missing **")
-        elif n > 0 and args_cd[0] not in self.lst:
-            print("** class doesn't exist **")
-        elif n == 1:
-            print("** instance id missing **")
-        elif "{}.{}".format(args_cd[0], args_cd[1]) not in obj_instance:
-            print("** no instance found **")
-        elif n == 2:
-            print("** attribute name missing **")
-        elif n == 3:
-            try:
-                type(eval[args_cd[2]]) != dict
-            except NameError:
+        else:
+            args = arg.split(" ")
+            ky = "{}.{}".format(args[0], args[1])
+            if args[0] not in self.lst:
+                print("** class doesn't exist **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            elif ky not in storage.all():
+                print("** no instance found **")
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
                 print("** value missing **")
-        elif n == 4:
-            obj = obj_instance["{}.{}".format(args_cd[0], args_cd[1])]
-            if args_cd[2] in obj.__class__.__dict__.keys():
-                val_type = type(obj.__class__.__dict__[args_cd[2]])
-                obj.__dict__[args_cd[2]] = val_type(args_cd[3])
             else:
-                obj.__dict__[args_cd[2]] = args_cd[3]
-        elif type(eval(args_cd[2])) == dict:
-            obj = obj_instance["{}.{}".format(args_cd[0], args_cd[1])]
-            for k, val in eval(args_cd[2]).items():
-                if (k in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[k] in {str, int, float})):
-                    val_type = type(obj.__class__.__dict__[k])
-                    obj.__dict[k] = val_type(val)
-        storage.save()
+                if args[3][0] == '"' and args[3][-1] == '"':
+                    args[3] = args[3][1:-1]
+            for key, val in storage.all().items():
+                if ky == key:
+                    setattr(storage.all()[key], args[2], args[3])
+                    storage.all()[key].save()
 
 
 if __name__ == "__main__":
