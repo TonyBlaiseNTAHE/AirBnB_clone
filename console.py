@@ -16,7 +16,6 @@ class HBNBCommand(cmd.Cmd):
     """ declaring methods
     """
     prompt = "(hbnb) "
-    lst = ['BaseModel']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -36,9 +35,9 @@ class HBNBCommand(cmd.Cmd):
         saves it (to the JSON file) and prints
         the id
         """
-        if not arg or arg == " ":
+        if arg is None or arg == "":
             print("** class name missing**")
-        elif arg not in self.lst:
+        elif arg not in storage.all_cls():
             print("** class doesn't exit**")
         else:
             obj = BaseModel()
@@ -51,11 +50,11 @@ class HBNBCommand(cmd.Cmd):
         of an instance based on the class
         name and id
         """
-        if not arg or arg == " ":
+        if arg is None or arg == "":
             print("** class doesn't exist**")
         else:
             args = arg.split(' ')
-            if args[0] not in self.lst:
+            if args[0] not in storage.all_cls():
                 print("** class doesn't exist**")
             elif len(args) < 2:
                 print("** instance id missing**")
@@ -72,11 +71,11 @@ class HBNBCommand(cmd.Cmd):
         of an instance based on the class
         name and id
         """
-        if not arg or arg == " ":
+        if arg is None or arg == "":
             print("** class doesn't exist**")
         else:
             args = arg.split(' ')
-            if args[0] not in self.lst:
+            if args[0] not in storage.all_cls():
                 print("** class doesn't exist**")
             elif len(args) < 2:
                 print("** instance id missing**")
@@ -115,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         and id by adding or updating attribute
         (save the change into the JSON file)
         """
-        if not arg or arg == " ":
+        if arg is None or arg == "":
             print("** class name missing **")
         else:
             args = arg.split(" ")
