@@ -16,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """ declaring methods
     """
     prompt = "(hbnb) "
-    lst = ['BaseModel']
+    lst = ['BaseModel', 'User']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -37,9 +37,9 @@ class HBNBCommand(cmd.Cmd):
         the id
         """
         if not arg or arg == " ":
-            print("** class name missing**")
+            print("** class name missing **")
         elif arg not in self.lst:
-            print("** class doesn't exit**")
+            print("** class doesn't exist **")
         else:
             obj = BaseModel()
             obj.save()
@@ -52,17 +52,17 @@ class HBNBCommand(cmd.Cmd):
         name and id
         """
         if not arg or arg == " ":
-            print("** class doesn't exist**")
+            print("** class name missing **")
         else:
             args = arg.split(' ')
             if args[0] not in self.lst:
-                print("** class doesn't exist**")
+                print("** class doesn't exist **")
             elif len(args) < 2:
-                print("** instance id missing**")
+                print("** instance id missing **")
             else:
                 key = "{}.{}".format(args[0], args[1])
                 if key not in storage.all():
-                    print("** no instance found**")
+                    print("** no instance found **")
                 else:
                     print(storage.all()[key])
 
@@ -73,17 +73,17 @@ class HBNBCommand(cmd.Cmd):
         name and id
         """
         if not arg or arg == " ":
-            print("** class doesn't exist**")
+            print("** class name missing **")
         else:
             args = arg.split(' ')
             if args[0] not in self.lst:
-                print("** class doesn't exist**")
+                print("** class doesn't exist **")
             elif len(args) < 2:
-                print("** instance id missing**")
+                print("** instance id missing **")
             else:
                 key = "{}.{}".format(args[0], args[1])
                 if key not in storage.all():
-                    print("** no instance found**")
+                    print("** no instance found **")
                 else:
                     del storage.all()[key]
                     storage.save()
@@ -101,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             args = arg.split(' ')
             if args[0] not in self.lst:
-                print("** class doesn't exist**")
+                print("** class doesn't exist **")
             else:
                 lst = []
                 for key, val in storage.all().items():
@@ -121,15 +121,15 @@ class HBNBCommand(cmd.Cmd):
             args = arg.split(" ")
             ky = "{}.{}".format(args[0], args[1])
             if args[0] not in self.lst:
-                print("** class doesn't exist**")
+                print("** class doesn't exist **")
             elif len(args) < 2:
-                print("** class doesn't exist**")
+                print("** instance id missing **")
             elif ky not in storage.all():
-                print("** instance id missing**")
+                print("** no instance found **")
             elif len(args) < 3:
-                print("** attribute name missing**")
+                print("** attribute name missing **")
             elif len(args) < 4:
-                print("** value missing**")
+                print("** value missing **")
             else:
                 if args[3][0] == '"' and args[3][-1] == '"':
                     args[3] = args[3][1:-1]
