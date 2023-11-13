@@ -2,6 +2,7 @@
 """module for cmd funtion"""
 import cmd
 import shlex
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
@@ -156,6 +157,25 @@ class HBNBCommand(cmd.Cmd):
                     val_type = type(obj.__class__.__dict__[k])
                     obj.__dict[k] = val_type(val)
         storage.save()
+
+    def default(self, args):
+        """ Function to handel <class name>.all()"""
+
+        obj_it = {
+            "all": self.do_all
+        }
+
+        args_cd = re.search(r"\.", args)
+
+        if args_cd is not None:
+            list_arg = [args[:args_cd.span()[0]], args[args_cd.span()[1]:]]
+            args2 = re.search(r"\((.*?)\)", list_arg[1])
+            if args2 is not None:
+                list_2 = [list_arg[1][:args2.span()[0]], args2.group()[1:-1]]
+                if list_2[0] in obj_it.keys():
+                    set_attr = "{} {}".format(list_arg[0], list_2[1])
+                    return obj_it[list_2[0]](set_attr)
+        print("*** Unknown syntax: {}".format(args))
 
 
 if __name__ == '__main__':
