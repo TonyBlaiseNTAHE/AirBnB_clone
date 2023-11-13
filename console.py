@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif n == 3:
             try:
-                type(eval[args_cd[2]]) != dict
+                type(eval(args_cd[2])) != dict
             except NameError:
                 print("** value missing **")
         elif n == 4:
