@@ -8,6 +8,7 @@ from datetime import datetime
 from uuid import uuid4
 from time import sleep
 from models.base_model import BaseModel
+import pycodestyle
 
 
 class BaseModelTest(unittest.TestCase):
@@ -52,6 +53,11 @@ class BaseModelTest(unittest.TestCase):
         self.assertIsInstance(created_at, str)
         self.assertIsInstance(number, int)
         self.assertIsInstance(cls_name, str)
+
+    def test_str_doc(self):
+        """ test str method doc"""
+        doc = BaseModel.__str__.__doc__
+        self.assertGreater(len(doc), 1)
 
 
 if __name__ == '__main__':
