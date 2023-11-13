@@ -10,7 +10,7 @@ class review
 """
 
 
-class review(BaseModel):
+class Review(BaseModel):
     """review attribute"""
     place_id = ""
     user_id = ""
