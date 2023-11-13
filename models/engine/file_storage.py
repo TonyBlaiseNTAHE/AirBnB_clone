@@ -18,12 +18,12 @@ class FileStorage:
     by <classname>.id
     """
     __file_path = "file.json"
-    __object = {}
+    __objects = {}
 
     # public instance methods
     def all(self):
         """return the dictionary `__object`"""
-        return FileStorage.__object
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -31,7 +31,7 @@ class FileStorage:
         key `<obj classname>.id`
         """
         key = "{}.{}".format(type(obj).__name__, obj.id)
-        self.__object[key] = obj
+        self.__objects[key] = obj
 
     def all_cls(self):
         """
@@ -52,7 +52,7 @@ class FileStorage:
         """
         dt = {}
         with open(self.__file_path, "w", encoding="utf-8") as file:
-            for key, val in self.__object.items():
+            for key, val in self.__objects.items():
                 dt[key] = val.to_dict()
             json.dump(dt, file)
 
