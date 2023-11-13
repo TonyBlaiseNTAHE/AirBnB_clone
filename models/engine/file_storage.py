@@ -34,15 +34,22 @@ class FileStorage:
         self.__objects[key] = obj
 
     def all_cls(self):
-        """
-        return a dictionary of all classes
-        """
-        from models.base_model import BaseModel
+        """Returns a dictionary of valid classes and their references."""
+        from models.user import BaseModel
         from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+
         dt = {
-            'BaseModel': BaseModel,
-            'User': User
-        }
+            "BaseModel": BaseModel,
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place
+            }
         return dt
 
     def save(self):
@@ -65,8 +72,10 @@ class FileStorage:
                 loaded_data = json.load(f)
                 for data in loaded_data.values():
                     cls_name = data.get("__class__")
-                    if cls_name in self.all_cls():
-                        cls_obj = self.all_cls()[cls_name]
+                    all_cls = self.all_cls()
+
+                    if cls_name in all_cls:
+                        cls_obj = all_cls[cls_name]
                         self.new(cls_obj(**data))
         except FileNotFoundError:
             pass
