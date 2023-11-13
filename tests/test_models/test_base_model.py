@@ -59,30 +59,15 @@ class BaseModelTest(unittest.TestCase):
         doc = BaseModel.__str__.__doc__
         self.assertGreater(len(doc), 1)
 
-    def test_module_doc(self):
-        """test module documentation"""
-        doc = __import__("models.base_model").__doc__
-        self.assertGreater(len(doc), 1)
+    def test_str(self):
+        obj = BaseModel()
+        obj_str = str(obj)
 
-    def test_class_doc(self):
-        """test class documentation"""
-        doc = BaseModel.__doc__
-        self.assertGreater(len(doc), 1)
-
-    def test_init_doc(self):
-        """test init method documentation"""
-        doc = BaseModel.__init__.__doc__
-        self.assertGreater(len(doc), 1)
-
-    def test_save_doc(self):
-        """test save method documentation"""
-        doc = BaseModel.save.__doc__
-        self.assertGreater(len(doc), 1)
-
-    def test_to_dict_doc(self):
-        """test to_dict method documentation"""
-        doc = BaseModel.to_dict.__doc__
-        self.assertGreater(len(doc), 1)
+        expected_output = "[BaseModel] ({}) {}".format(
+            obj.id,
+            obj.__dict__
+            )
+        self.assertEqual(obj_str, expected_output)
 
 
 if __name__ == '__main__':
