@@ -14,11 +14,12 @@ class BaseModel
 
 
 class BaseModel:
-    """initializing public class attribute
+    """
+    initializing public class attribute
     """
     def __init__(self, *args, **kwargs):
         """initialize class attribute"""
-        lst = ['Created_at', 'updated_at']
+        lst = ['created_at', 'updated_at']
         if kwargs or kwargs != {}:
             for key, val in kwargs.items():
                 if key != '__class__':
@@ -33,8 +34,9 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """ returns the class name, id and
-            dictionary of the instance
+        """
+        returns the class name, id and
+        dictionary of the instance
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
@@ -49,14 +51,8 @@ class BaseModel:
         """ returns a dictionary containning all keys/values
             of __dict__ of the instance
         """
-        d = {}
-        # loop through the dictionary and insert class key with the
-        # class name of the object
-        d['__class__'] = self.__class__.__name__
-        for key, value in self.__dict__.items():
-            if isinstance(value, datetime):
-                d[key] = value.isoformat()
-            else:
-                d[key] = value
-            dt = dict(d)
-        return dt
+        my_dt = self.__dict__.copy()
+        my_dt["__class__"] = type(self).__name__
+        my_dt["created_at"] = self.created_at.isoformat()
+        my_dt["updated_at"] = self.updated_at.isoformat()
+        return my_dt

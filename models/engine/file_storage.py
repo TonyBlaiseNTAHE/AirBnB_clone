@@ -23,7 +23,7 @@ class FileStorage:
     # public instance methods
     def all(self):
         """return the dictionary `__object`"""
-        return self.__object
+        return FileStorage.__object
 
     def new(self, obj):
         """
