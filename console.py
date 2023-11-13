@@ -158,24 +158,25 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict[k] = val_type(val)
         storage.save()
 
-    def default(self, args):
-        """ Function to handel <class name>.all()"""
-
-        obj_it = {
-            "all": self.do_all
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
         }
-
-        args_cd = re.search(r"\.", args)
-
-        if args_cd is not None:
-            list_arg = [args[:args_cd.span()[0]], args[args_cd.span()[1]:]]
-            args2 = re.search(r"\((.*?)\)", list_arg[1])
-            if args2 is not None:
-                list_2 = [list_arg[1][:args2.span()[0]], args2.group()[1:-1]]
-                if list_2[0] in obj_it.keys():
-                    set_attr = "{} {}".format(list_arg[0], list_2[1])
-                    return obj_it[list_2[0]](set_attr)
-        print("*** Unknown syntax: {}".format(args))
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
 
 
 if __name__ == '__main__':
