@@ -36,7 +36,7 @@ class BaseModel:
         """ returns the class name, id and
             dictionary of the instance
         """
-        return f"[{self.__class__.__name__}]({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """ updates the public instance attribute
