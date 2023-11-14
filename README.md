@@ -35,3 +35,44 @@ clone of AirBnB platform with limited features.
 
     (hbnb) quit
     $
+ 
+### How to create an instance of a class
+
+    (hbnb) create <class>
+
+### How to Prints the string representation of an instance
+
+    (hbnb) show <class> <id>
+
+### How to destroy an instance 
+
+    (hbnb) destory <class> <id>
+
+### How to Prints all string representation of all instances of a class
+
+    (hbnb) all <class> or all
+
+### How to update an instance based on the clas and id
+
+    (hbnb) update <class name> <id> <attribute name> "<attribute value>"
+
+### How to retrieve all instances of a class
+
+    (hbnb) <class name>.all()
+
+### How to retrieve the number of instances of a class
+
+	(hbnb) <class name>.count()
+
+### How to retrieve an instance based on its ID
+
+	(hbnb) <class name>.show(<id>)
+
+### How to destroy an instance based on his ID
+	
+	(hbnb) <class name>.destroy(<id>)
+
+### How to update an instance based on his ID
+	<class name>.update(<id>, <attribute name>, <attribute value>)
+
+

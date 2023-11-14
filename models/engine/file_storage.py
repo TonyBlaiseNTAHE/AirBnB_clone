@@ -41,6 +41,7 @@ class FileStorage:
         from models.city import City
         from models.amenity import Amenity
         from models.place import Place
+        from models.review import Review
 
         dt = {
             "BaseModel": BaseModel,
@@ -48,7 +49,8 @@ class FileStorage:
             "State": State,
             "City": City,
             "Amenity": Amenity,
-            "Place": Place
+            "Place": Place,
+            "Review": Review
             }
         return dt
 
