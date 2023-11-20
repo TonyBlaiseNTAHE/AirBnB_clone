@@ -81,21 +81,7 @@ class HBNBCommand(cmd.Cmd):
         elif "{}.{}".format(show_args[0], show_args[1]) not in obj_instance:
             print("** no instance found **")
         else:
-<<<<<<< HEAD
-            args = arg.split(' ')
-            if args[0] not in storage.all_cls():
-                print("** class doesn't exist **")
-            elif len(args) < 2:
-                print("** instance id missing **")
-            else:
-                key = "{}.{}".format(args[0], args[1])
-                if key not in storage.all():
-                    print("** no instance found **")
-                else:
-                    print(storage.all()[key])
-=======
             print(obj_instance["{}.{}".format(show_args[0], show_args[1])])
->>>>>>> f8795216253b3bf0660bca2e80964e2cd549baf8
 
     def do_destroy(self, arg):
         """
@@ -107,11 +93,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split(' ')
-<<<<<<< HEAD
             if args[0] not in storage.all_cls():
-=======
-            if args[0] not in HBNBCommand.__classes:
->>>>>>> f8795216253b3bf0660bca2e80964e2cd549baf8
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -128,23 +110,11 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all instances
             based or not on the class name
         """
-
-        args_cd, n = parse(args)
+        args_cd, n = parse(args);
 
         if n > 0 and args_cd[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-<<<<<<< HEAD
-            args = arg.split(' ')
-            if args[0] not in storage.all_cls():
-                print("** class doesn't exist **")
-            else:
-                lst = []
-                for key, val in storage.all().items():
-                    if type(val).__name__ == args[0]:
-                        lst.append(str(val))
-                print(lst)
-=======
             objl = []
             for obj in storage.all().values():
                 if len(args_cd) > 0 and args_cd[0] == obj.__class__.__name__:
@@ -152,7 +122,6 @@ class HBNBCommand(cmd.Cmd):
                 elif n == 0:
                     objl.append(obj.__str__())
             print(objl)
->>>>>>> f8795216253b3bf0660bca2e80964e2cd549baf8
 
     def do_update(self, args):
         """ update <class name> <id> <attribute name> "<attribute value>"
@@ -163,11 +132,7 @@ class HBNBCommand(cmd.Cmd):
 
         if n == 0:
             print("** class name missing **")
-<<<<<<< HEAD
-        elif n > 0 and args_cd[0] not in storage.all_cls():
-=======
         elif n > 0 and args_cd[0] not in HBNBCommand.__classes:
->>>>>>> f8795216253b3bf0660bca2e80964e2cd549baf8
             print("** class doesn't exist **")
         elif n == 1:
             print("** instance id missing **")
