@@ -1,0 +1,55 @@
+/*
+==========================
+Search Styles
+==========================
+*/
+.filters {
+	position: relative;
+	color: white;
+	height: 70px;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+}
+
+.filters button {
+	font-size: 18px;
+	background-color: #FF5A5F;
+	color: #FFFFFF;
+	height: 48px;
+	width: 20%;
+	border: 0px;
+	border-radius: 4px;
+	position: absolute;
+	right: 30px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.filters button:hover {
+	opacity: 90%;
+}
+
+.filters div {
+	height: 100%;
+	width: 25%;
+	display: inline-block;
+}
+
+.filters div.locations {
+	border-right: 1px solid #DDDDDD;
+}
+h3 {
+	font-weight: 600px;
+	color: black;
+	padding-left: 25%;
+}
+
+h4 {
+	font-weight: 400px;
+	font-size: 14px;
+	color: dimgray;
+	padding-left: 25%;
+    margin-top: -15px;
+}
